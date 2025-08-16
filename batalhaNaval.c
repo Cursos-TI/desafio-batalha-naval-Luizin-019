@@ -27,6 +27,29 @@ int main(){
         {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
         {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "}
     };
+
+    //adiciona 2 navios vertical e horizontal
+    int codx, cody;
+    codx = 2;
+    cody = 5;
+    oceano[codx][cody] = " 3 ";
+    oceano[codx+1][cody] = " 3 ";
+    oceano[codx+2][cody] = " 3 ";
+
+    codx = 5;
+    cody = 6;
+    oceano[codx][cody] = " 3 ";
+    oceano[codx][cody+1] = " 3 ";
+    oceano[codx][cody+2] = " 3 ";
+
+    //adiciona 2 navios na diagonal
+    
+    codx = 3;
+    cody = 4;
+    oceano[codx][cody] = " 3 ";
+    oceano[codx-1][cody-1] = " 3 ";
+    oceano[codx-2][cody-2] = " 3 ";
+
    //exibe tabuleiro inicial 
    oceanoView(oceano);
             printf("\n");
@@ -34,13 +57,13 @@ int main(){
     
 //fomulario interativo para usuario posicioanr o navio onde quer 
 int x, y, posicao;
-    printf("Digite coordenadas x, y e posição (horizontal'1' e vertical'2') para posicionar um navio:\n");
-    printf("Position 1 ou 2: \n");
+    printf("Digite coordenadas x, y e posição (horizontal'1', vertical'2', diagonal primaria'3', diagonal secundaria'4') para posicionar um navio:\n");
+    printf("Position 1, 2, 3, 4: \n");
     scanf("%d", &posicao);
     printf("Coordenadas x: \n");
-    scanf("%d", &x);
-    printf("Coordenadas y: \n");
     scanf("%d", &y);
+    printf("Coordenadas y: \n");
+    scanf("%d", &x);
 
 if(x>=0 && x<=9 && y>=0 && y<=9){
          switch (posicao)  {
@@ -64,6 +87,32 @@ if(x>=0 && x<=9 && y>=0 && y<=9){
                 oceano[x+2][y] = " 3 ";
                 printf("Návio posicionado!\n");  
                  //exibe tabuleiro modificado com o navio posicionado nas coordenadas escolhidas 
+                oceanoView(oceano);
+            } else{
+                //caso ja tenha um navio na posiçao desejada
+                printf("Posições já ocupadas!\n");
+            }
+        break;
+        case 3:
+            if(oceano[x][y] == " 0 " && oceano[x-1][y-1] == " 0 "&&oceano[x-2][y-2] == " 0 "){
+                oceano[x][y] = " 3 ";
+                oceano[x-1][y-1] = " 3 ";
+                oceano[x-2][y-2] = " 3 ";
+                printf("Návio posicionado!\n");
+                //exibe tabuleiro modificado com o navio posicionado nas coordenadas escolhidas 
+                oceanoView(oceano);
+            } else{
+                //caso ja tenha um navio na posiçao desejada
+                printf("Posições já ocupadas!\n");
+            }
+        break;
+        case 4:
+            if(oceano[x][y] == " 0 " && oceano[x-1][y+1] == " 0 "&& oceano[x-2][y+2] == " 0 "){
+                oceano[x][y] = " 3 ";
+                oceano[x-1][y+1] = " 3 ";
+                oceano[x-2][y+2] = " 3 ";
+                printf("Návio posicionado!\n");
+                //exibe tabuleiro modificado com o navio posicionado nas coordenadas escolhidas 
                 oceanoView(oceano);
             } else{
                 //caso ja tenha um navio na posiçao desejada
