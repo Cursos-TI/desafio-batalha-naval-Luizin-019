@@ -1,40 +1,82 @@
 #include <stdio.h>
+//funçãp que exibe o tabuleiro
+void oceanoView(char *oceano[10][10]){
+    printf("Batalha NAVAL\n");
+    printf("OBS:Coordenada do mapa vão de eixo x(0-9) e eixo y(0-9)\n");
+      for(int i = 0; i <= 9; i++){
+        for(int v = 0; v <= 9; v++){
+           if(v%10 == 0){
+            printf("\n");
+           }
+            printf("%s", oceano[i][v]);
+        }
+    }
+}
 
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
-
-int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
-
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
-
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
-
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
+int main(){
+//cria tabuleiro "oceano"
+    char * oceano[10][10] = {
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "},
+        {" 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "," 0 "}
+    };
+   //exibe tabuleiro inicial 
+   oceanoView(oceano);
+            printf("\n");
+            printf("\n");
     
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
+//fomulario interativo para usuario posicioanr o navio onde quer 
+int x, y, posicao;
+    printf("Digite coordenadas x, y e posição (horizontal'1' e vertical'2') para posicionar um navio:\n");
+    printf("Position 1 ou 2: \n");
+    scanf("%d", &posicao);
+    printf("Coordenadas x: \n");
+    scanf("%d", &x);
+    printf("Coordenadas y: \n");
+    scanf("%d", &y);
 
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
-
+if(x>=0 && x<=9 && y>=0 && y<=9){
+         switch (posicao)  {
+        case 1:
+            if(oceano[x][y] == " 0 " && oceano[x][y+1] == " 0 "&&oceano[x][y+2] == " 0 "){
+                oceano[x][y] = " 3 ";
+                oceano[x][y+1] = " 3 ";
+                oceano[x][y+2] = " 3 ";
+                printf("Návio posicionado!\n");
+                //exibe tabuleiro modificado com o navio posicionado nas coordenadas escolhidas 
+                oceanoView(oceano);
+            } else{
+                //caso ja tenha um navio na posiçao desejada
+                printf("Posições já ocupadas!\n");
+            }
+        break;
+        case 2:
+    if(oceano[x][y] == " 0 " && oceano[x+1][y] == " 0 "&&oceano[x+2][y] == " 0 "){
+                oceano[x][y] = " 3 ";
+                oceano[x+1][y] = " 3 ";
+                oceano[x+2][y] = " 3 ";
+                printf("Návio posicionado!\n");  
+                 //exibe tabuleiro modificado com o navio posicionado nas coordenadas escolhidas 
+                oceanoView(oceano);
+            } else{
+                //caso ja tenha um navio na posiçao desejada
+                printf("Posições já ocupadas!\n");
+            }
+        break;
+        default:
+          //caso a posição nao seja nem horizontal-1 ou vertical-2
+   printf("Posição inválida!\n");
+   }
+    } else{
+        //caso a coordenada enviada esteja fora da dimeção do tabuleiro
+        printf("Coordenadas Inválidas!\n");
+    }
     return 0;
 }
